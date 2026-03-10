@@ -1,0 +1,24 @@
+product,component,spec,supplier,supplier_pn,qty_per_unit,unit_cost_usd,notes
+ITI,Precision Ball,5mm chrome steel ball G25,McMaster-Carr,9642K13,3,0.50,Kelvin coupling contact elements - tool plate side
+ITI,Ground Dowel Pin,"4mm dia x 12mm long, h6 tolerance, alloy steel",McMaster-Carr,97395A422,6,1.20,Two pins per cradle x 3 cradles - master plate side
+ITI,Hall Effect Sensor,"SS49E ratiometric linear, TO-92",Digi-Key,480-1014-ND,2,1.85,Seating detection + Z-force analog output
+ITI,Neodymium Disc Magnet,"6mm dia x 3mm thick, N52, axial magnetization",McMaster-Carr,5862K145,4,0.95,Electromagnetic preload reference + hall target
+ITI,MEMS Flow Sensor,"Omron D6F-P0010A2, 0-10 L/min, analog out",Digi-Key,Z11534-ND,1,28.50,Inline vacuum flow sensing for part presence
+ITI,Inductive Proximity Sensor,"4mm barrel, NPN NO, 1mm range, M8 connector",Digi-Key,2330-BES-516-324-E4-C-PU-05-ND,1,18.75,Tooling-face part presence sensing - Balluff
+ITI,Compression Spring,"6mm OD x 10mm free length, 1.2 N/mm rate, stainless",McMaster-Carr,9657K307,6,0.65,Kinematic coupling preload service
+ITI,Steel Keeper Ring,"20mm OD x 12mm ID x 5mm thick, turned 1018 mild steel",custom,n/a,2,3.00,Electromagnet flux return path - turned on lathe
+Pallet,Precision Ball,5mm chrome steel ball G25,McMaster-Carr,9642K13,3,0.50,Kelvin coupling contact elements - pallet side
+Pallet,Ground Dowel Pin,"5mm dia x 16mm long, h6 tolerance, alloy steel",McMaster-Carr,97395A434,6,1.35,Two pins per cradle x 3 cradles - base station side
+Pallet,Hall Effect Sensor,"A1302 ratiometric linear, SOT-23W",Digi-Key,620-1404-1-ND,1,1.45,Seating confirmation - base station mounted
+Pallet,Neodymium Disc Magnet,"6mm dia x 3mm thick, N52, axial magnetization",McMaster-Carr,5862K145,1,0.95,Hall sensor target - pallet mounted
+Pallet,Rotary Solenoid,"24VDC, 25mm frame, 90deg rotation, Ledex equivalent",Digi-Key,527-1082-ND,1,22.00,Twist-lock release actuator - base station mounted
+Pallet,Compression Spring,"6mm OD x 8mm free length, 0.8 N/mm rate, stainless",McMaster-Carr,9657K293,4,0.55,Latch return spring preload
+HeatSet,K-Type Thermocouple,"1.5mm dia sheath x 20mm length, grounded junction",Digi-Key,290-2159-ND,1,8.50,Tip temperature feedback - inserted into heater block
+HeatSet,Cartridge Heater,"6mm dia x 20mm length, 24V 40W, stainless sheath",McMaster-Carr,3618K451,1,12.00,Resistive heated tip - press fit into copper block
+HeatSet,PEEK Rod Stock,"25mm diameter x 300mm length, natural color",McMaster-Carr,8538K31,0.05,42.00,Thermal break collar - Z surface reference. Qty is fraction of stock rod per unit
+HeatSet,Foil Strain Gauge,"350 ohm, 3mm grid, polyimide backing",Digi-Key,SGD-3/350-LY11-ND,2,15.00,Flexure force sensing - half bridge configuration
+HeatSet,INA125 Instrumentation Amp,"single supply, G=100 default, DIP-16",Digi-Key,296-8389-5-ND,1,6.75,Strain gauge signal conditioning - protoboard mount
+VisionMount,Precision Ball,5mm chrome steel ball G25,McMaster-Carr,9642K13,3,0.50,Kelvin coupling - camera mount side
+VisionMount,Ground Dowel Pin,"4mm dia x 12mm long, h6 tolerance, alloy steel",McMaster-Carr,97395A422,6,1.20,Two pins per cradle x 3 cradles - bracket side
+VisionMount,Neodymium Disc Magnet,"6mm dia x 3mm thick, N52, axial magnetization",McMaster-Carr,5862K145,3,0.95,Magnetic preload - holds camera mount to bracket
+VisionMount,Compression Spring,"6mm OD x 6mm free length, 1.0 N/mm rate, stainless",McMaster-Carr,9657K297,3,0.55,Anti-tip preload - ensures nesting force during magnet approach

@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+.venv/
+venv/
+*.whl
+
+# FreeCAD temporary/backup files
+*.FCStd1
+*.FCBak
+*.lock
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Do NOT ignore CAD outputs — these are deliverables
+# cad/outputs/ is tracked intentionally (STL, STEP exports)
+
+# Do NOT ignore FreeCAD project files — these are source
+# cad/freecad/ is tracked intentionally (.FCStd files)
+
+# Ignore large intermediate mesh files if generated outside outputs/
+*.stl
+*.step
+*.stp
+
+# But explicitly track the outputs directory
+!cad/outputs/*.stl
+!cad/outputs/*.step
+!cad/outputs/*.stp
+
+# Ignore STEP files in freecad working dir (only FCStd is source)
+cad/freecad/*.step
+cad/freecad/*.stp
+cad/freecad/*.stl
