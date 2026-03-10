@@ -49,7 +49,11 @@ import Part
 # ---------------------------------------------------------------------------
 # Output paths — resolve relative to this script's location
 # ---------------------------------------------------------------------------
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+try:
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    # Running via FreeCADCmd -c exec() — __file__ is not defined
+    SCRIPT_DIR = os.path.abspath("C:/Users/user/kinematic-cell-tooling/cad/scripts")
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, os.pardir))
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "cad", "outputs")
 FREECAD_DIR = os.path.join(PROJECT_ROOT, "cad", "freecad")
@@ -603,7 +607,7 @@ def add_shape_to_doc(doc, name, shape, color=None):
     """Add a shape to the FreeCAD document as a Part::Feature and set color."""
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = shape
-    if color is not None:
+    if color is not None and hasattr(obj, "ViewObject") and obj.ViewObject is not None:
         obj.ViewObject.ShapeColor = color
     return obj
 
@@ -845,21 +849,31 @@ def build_document():
     doc.recompute()
 
     # -----------------------------------------------------------------------
-    # Export STL files
+    # Export STL files via Mesh module (Part.export silently fails for STL
+    # when given raw TopoShape objects in headless mode)
     # -----------------------------------------------------------------------
+    import Mesh
+    import MeshPart
+
+    def _export_stl(shape, filepath, linear_deflection=0.1, angular_deflection=0.5):
+        """Mesh a TopoShape and write STL. Works in headless FreeCADCmd."""
+        mesh = MeshPart.meshFromShape(
+            Shape=shape,
+            LinearDeflection=linear_deflection,
+            AngularDeflection=angular_deflection,
+        )
+        mesh.write(filepath)
+        print(f"Exported: {filepath}  ({mesh.CountFacets} facets)")
 
     # Base station with pins (single manufacturing piece + pressed pins)
     base_with_pins = base_shape.fuse(pins_fused)
-    Part.export([base_with_pins], os.path.join(OUTPUT_DIR, "base_station.stl"))
-    print(f"Exported: {os.path.join(OUTPUT_DIR, 'base_station.stl')}")
+    _export_stl(base_with_pins, os.path.join(OUTPUT_DIR, "base_station.stl"))
 
     # Pallet with latch pin and balls
-    Part.export([pallet_with_pin], os.path.join(OUTPUT_DIR, "pallet.stl"))
-    print(f"Exported: {os.path.join(OUTPUT_DIR, 'pallet.stl')}")
+    _export_stl(pallet_with_pin, os.path.join(OUTPUT_DIR, "pallet.stl"))
 
     # Latch pin alone (for detail views / printing)
-    Part.export([latch_pin_shape], os.path.join(OUTPUT_DIR, "latch_pin.stl"))
-    print(f"Exported: {os.path.join(OUTPUT_DIR, 'latch_pin.stl')}")
+    _export_stl(latch_pin_shape, os.path.join(OUTPUT_DIR, "latch_pin.stl"))
 
     # Full locked assembly (merged visualization)
     locked_assy = base_with_pins
@@ -869,8 +883,7 @@ def build_document():
     seated_pallet_locked = _rotate_shape_z(seated_pallet_locked, LATCH_LOCK_ANGLE)
     locked_assy = locked_assy.fuse(seated_pallet_locked)
 
-    Part.export([locked_assy], os.path.join(OUTPUT_DIR, "assembly_locked.stl"))
-    print(f"Exported: {os.path.join(OUTPUT_DIR, 'assembly_locked.stl')}")
+    _export_stl(locked_assy, os.path.join(OUTPUT_DIR, "assembly_locked.stl"))
 
     # -----------------------------------------------------------------------
     # Save FreeCAD document
