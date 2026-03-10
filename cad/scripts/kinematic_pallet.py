@@ -866,6 +866,21 @@ def build_document(cfg=None):
     _export_stl(locked_assy, f"assembly_locked_{label}.stl")
 
     # -----------------------------------------------------------------------
+    # Export STEP files (exact B-rep geometry for machinists / downstream CAM)
+    # -----------------------------------------------------------------------
+
+    def _export_step(shape, filename):
+        filepath = os.path.join(OUTPUT_DIR, filename)
+        shape.exportStep(filepath)
+        print(f"  Exported: {filename}")
+
+    print(f"\nExporting STEP ({label}):")
+    _export_step(base_with_pins, f"base_station_{label}.step")
+    _export_step(pallet_with_pin, f"pallet_{label}.step")
+    _export_step(latch_pin_shape, f"latch_pin_{label}.step")
+    _export_step(locked_assy, f"assembly_locked_{label}.step")
+
+    # -----------------------------------------------------------------------
     # Save FreeCAD document
     # -----------------------------------------------------------------------
     fcstd_path = os.path.join(FREECAD_DIR, f"kinematic_pallet_{label}.FCStd")
